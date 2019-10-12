@@ -28,12 +28,13 @@ class PostTable extends Table{
                             ORDER BY article.date DESC", [$category_id]);
     }
 
-    public function find($id){
+    public function findWithCategory($id){
         return $this->query("
-                            SELECT article.id,article.titre,contenu, categories.titre as categorie 
+                            SELECT article.id,article.titre,contenu,categories.titre as categorie, article.category_id
                             FROM article 
                             LEFT JOIN categories 
                                  ON category_id = categories.id
                             WHERE article.id = ?", [$id], true);
     }
+
 }

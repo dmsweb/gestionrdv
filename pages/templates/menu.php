@@ -11,6 +11,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="./index.html">Home 1</a></li>
+                    <li><a href="admin.php">Administration</a></li>
                     <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                 </ul>
             </li>
