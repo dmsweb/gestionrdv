@@ -1,11 +1,12 @@
 <?php
-$categorie = \App\Table\Categorie::find($_GET['id']);
+$app = App::getInstance();
+$categorie = $app->getTable('Category')->find($_GET['id']);
 if($categorie === false){
- \App\App::notFound();
+ $app->notFound();
 }
-$articles = \App\Table\Article::lastByCategory($_GET['id']);
+$articles = $app->getTable('Post')->lastByCategory($_GET['id']);
 
-$categories = \App\Table\Categorie::all();
+$categories = $app->getTable('Category')->all();
 ?>
 <p style="padding-top: 50px;"></p>
 <h1><?= $categorie->titre ?></h1>
@@ -22,7 +23,7 @@ $categories = \App\Table\Categorie::all();
     </div>
     <div class="col-sm-4" style="padding-top: 50px;" >
         <ul>
-            <?php foreach (\App\Table\Categorie::all() as $categorie):?>
+            <?php foreach ($categories as $categorie):?>
                 <li><a href="<?= $categorie->url; ?>"><?= $categorie->titre; ?></a></li>
             <?php endforeach; ?>
         </ul>
