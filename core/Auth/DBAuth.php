@@ -15,7 +15,7 @@ class DBAuth{
 
     public function getUserId(){
         if($this->logged()){
-            return $_SESSION['auth'];
+            return $_SESSION['telephone'];
         }
         return false;
     }
@@ -28,10 +28,11 @@ class DBAuth{
 
     public function login($username, $password){
         $user = $this->db->prepare("
-        SELECT * FROM users WHERE username = ?", [$username], null, true);
+        SELECT * FROM employer WHERE telephone = ?", [$username], null, true);
         if($user){
              if($user->password === sha1($password)){
-                 $_SESSION['auth'] = $user-id;
+               $_SESSION['telephone'] = $user->telephone;
+               $_SESSION['id'] = $user->id;
                  return true;
              }
         }
@@ -39,6 +40,12 @@ class DBAuth{
     }
 
     public function logged(){
-        return isset($_SESSION['auth']);
+        return isset($_SESSION['telephone']);
+    }
+
+    public function loggeOut(){
+        session_destroy();
+        session_reset();
+        return true;
     }
 }

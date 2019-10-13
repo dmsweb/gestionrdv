@@ -20,7 +20,7 @@ class MysqlDatabase extends Database{
 
     private function getPDO(){
         if($this->pdo == null){
-            $pdo = $pdo = new PDO('mysql:dbname=blog;host=localhost', 'root','root');
+            $pdo = $pdo = new PDO('mysql:dbname=rdv;host=localhost;charset=UTF8', 'root','root');
             $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
             $this->pdo = $pdo;
         }
@@ -29,6 +29,7 @@ class MysqlDatabase extends Database{
 
     public function query($statement, $class_name = null, $one = false){
         $req =  $this->getPDO()->query($statement);
+        //var_dump($class_name);
         if(
             strpos($statement, 'UPDATE') === 0 ||
             strpos($statement, 'INSERT') === 0 ||
@@ -36,7 +37,7 @@ class MysqlDatabase extends Database{
         ){
             return $req;
         }
-        if($class_name === null){
+        if($class_name != null){
             $req->setFetchMode(PDO::FETCH_OBJ);
         }else{
             $req->setFetchMode(PDO::FETCH_CLASS,$class_name);
@@ -59,6 +60,7 @@ class MysqlDatabase extends Database{
         ){
             return $res;
         }
+
         if($class_name === null){
             $req->setFetchMode(PDO::FETCH_OBJ);
         }else{

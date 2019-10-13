@@ -69,10 +69,12 @@ class Table{
 
     public function extract($key, $value){
         $record = $this->all();
+        //var_dump($record);
         $return = [];
         foreach ($record as $k => $v){
             $return[$v->$key] = $v->$value;
         }
+
 
         return $return;
     }

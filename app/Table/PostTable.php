@@ -7,7 +7,7 @@ use Core\Table\Table;
 class PostTable extends Table{
 
 
-    protected $table = 'article';
+    /*protected $table = 'article';
 
     public function last(){
         return $this->query("
@@ -35,6 +35,6 @@ class PostTable extends Table{
                             LEFT JOIN categories 
                                  ON category_id = categories.id
                             WHERE article.id = ?", [$id], true);
-    }
+    }*/
 
 }
