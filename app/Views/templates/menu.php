@@ -7,12 +7,22 @@
             <li class="nav-label">Dashboard</li>
             <li>
                 <a class="has-arrow" href="index.php?p=admin.employer.index" aria-expanded="false">
+                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Accueil</span>
+                </a>
+            </li>
+            <li>
+                <a class="has-arrow" href="#" aria-expanded="false">
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">gestion employer</span>
                 </a>
             </li>
             <li>
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Mon profil</span>
+                </a>
+            </li>
+            <li>
                 <a class="has-arrow" href="index.php?p=admin.employer.logout" aria-expanded="false">
-                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Deconecter</span>
+                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Deconnecter</span>
                 </a>
             </li>
 

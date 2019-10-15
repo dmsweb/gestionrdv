@@ -1,7 +1,6 @@
 <?php
 namespace Core\Auth;
 
-
 use Core\Database\Database;
 
 class DBAuth{
@@ -28,10 +27,16 @@ class DBAuth{
 
     public function login($username, $password){
         $user = $this->db->prepare("
-        SELECT * FROM employer WHERE telephone = ?", [$username], null, true);
+        SELECT employer.id, nomComplet,email,telephone,password,typeEmployer.libelle as typeEmployer, domaine.libelle as domaine
+        FROM employer, typeEmployer,domaine
+        WHERE employer.id_type_employer = typeEmployer.id && employer.id_domaine = domaine.id &&
+        telephone = ?", [$username], null, true);
+
         if($user){
-             if($user->password === sha1($password)){
+             if($user->password === $password/*sha1($password)*/){
                $_SESSION['telephone'] = $user->telephone;
+               $_SESSION['domaine'] = $user->domaine;
+               $_SESSION['type'] = $user->typeEmployer;
                $_SESSION['id'] = $user->id;
                  return true;
              }
