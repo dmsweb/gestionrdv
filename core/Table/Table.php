@@ -92,5 +92,4 @@ class Table{
            return $this->db->query($statement,str_replace('Table','Entity',get_class($this)), $one);
         }
     }
-
 }

@@ -5,16 +5,30 @@
     <div class="nk-nav-scroll">
         <ul class="metismenu" id="menu">
             <li class="nav-label">Dashboard</li>
-            <li>
-                <a class="has-arrow" href="index.php?p=admin.employer.index" aria-expanded="false">
-                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Accueil</span>
-                </a>
-            </li>
-            <li>
-                <a class="has-arrow" href="#" aria-expanded="false">
-                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">gestion employer</span>
-                </a>
-            </li>
+            <?php if($_SESSION["type"] === "admin"){?>
+                <li>
+                    <a class="has-arrow" href="index.php?p=admin.employer.index" aria-expanded="false">
+                        <i class="icon-speedometer menu-icon"></i><span class="nav-text">Accueil</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="has-arrow" href="#" aria-expanded="false">
+                        <i class="icon-speedometer menu-icon"></i><span class="nav-text">gestion employer</span>
+                    </a>
+                </li>
+            <?php }elseif ($_SESSION["type"] === "secretaire"){?>
+                <li>
+                    <a class="has-arrow" href="index.php?p=admin.rendezVous.index" aria-expanded="false">
+                        <i class="icon-speedometer menu-icon"></i><span class="nav-text">Accueil</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="has-arrow" href="#" aria-expanded="false">
+                        <i class="icon-speedometer menu-icon"></i><span class="nav-text">Gestion Rendez-vous</span>
+                    </a>
+                </li>
+            <?php }
+            ?>
             <li>
                 <a class="has-arrow" href="#" aria-expanded="false">
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Mon profil</span>
@@ -25,7 +39,6 @@
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Deconnecter</span>
                 </a>
             </li>
-
           <!--  <li>
           <li class="nav-label">Apps</li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">

@@ -77,26 +77,27 @@ INSERT INTO `employer` VALUES (1,'Dovi Aristide','778580286','dovi.aristide@gmai
 UNLOCK TABLES;
 
 --
--- Table structure for table `etat_rendez_vous`
+-- Table structure for table `etatRendezVous`
 --
 
-DROP TABLE IF EXISTS `etat_rendez_vous`;
+DROP TABLE IF EXISTS `etatRendezVous`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `etat_rendez_vous` (
+CREATE TABLE `etatRendezVous` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `etat_rendez_vous`
+-- Dumping data for table `etatRendezVous`
 --
 
-LOCK TABLES `etat_rendez_vous` WRITE;
-/*!40000 ALTER TABLE `etat_rendez_vous` DISABLE KEYS */;
-/*!40000 ALTER TABLE `etat_rendez_vous` ENABLE KEYS */;
+LOCK TABLES `etatRendezVous` WRITE;
+/*!40000 ALTER TABLE `etatRendezVous` DISABLE KEYS */;
+INSERT INTO `etatRendezVous` VALUES (1,'accorder'),(2,'reporter'),(3,'annuler');
+/*!40000 ALTER TABLE `etatRendezVous` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -113,7 +114,7 @@ CREATE TABLE `patient` (
   `telephone` varchar(50) NOT NULL,
   `motif` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +123,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
+INSERT INTO `patient` VALUES (1,'Dovi Aristide','Liberté 5 villa 5508','+221 0778580286','sfffgs'),(2,'Dovi Aristide','Liberté 5 villa 5508','+221 0778580286','edfdfd');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,13 +155,13 @@ LOCK TABLES `planning` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `rendez_vous`
+-- Table structure for table `rendezVous`
 --
 
-DROP TABLE IF EXISTS `rendez_vous`;
+DROP TABLE IF EXISTS `rendezVous`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rendez_vous` (
+CREATE TABLE `rendezVous` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dateRendezVous` date NOT NULL,
   `heureRendezVous` datetime NOT NULL,
@@ -170,19 +172,20 @@ CREATE TABLE `rendez_vous` (
   KEY `rendez_vous_patient_FK` (`id_patient`),
   KEY `rendez_vous_etat_rendez_vous1_FK` (`id_etat_rendez_vous`),
   KEY `id_domaine` (`id_domaine`),
-  CONSTRAINT `rendez_vous_etat_rendez_vous1_FK` FOREIGN KEY (`id_etat_rendez_vous`) REFERENCES `etat_rendez_vous` (`id`),
-  CONSTRAINT `rendez_vous_ibfk_1` FOREIGN KEY (`id_domaine`) REFERENCES `domaine` (`id`),
+  CONSTRAINT `rendezVous_ibfk_1` FOREIGN KEY (`id_domaine`) REFERENCES `domaine` (`id`),
+  CONSTRAINT `rendez_vous_etat_rendez_vous1_FK` FOREIGN KEY (`id_etat_rendez_vous`) REFERENCES `etatRendezVous` (`id`),
   CONSTRAINT `rendez_vous_patient_FK` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `rendez_vous`
+-- Dumping data for table `rendezVous`
 --
 
-LOCK TABLES `rendez_vous` WRITE;
-/*!40000 ALTER TABLE `rendez_vous` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rendez_vous` ENABLE KEYS */;
+LOCK TABLES `rendezVous` WRITE;
+/*!40000 ALTER TABLE `rendezVous` DISABLE KEYS */;
+INSERT INTO `rendezVous` VALUES (1,'2019-12-12','2019-12-12 12:10:20',1,2,1),(2,'2019-12-12','2019-12-12 12:10:20',2,1,2);
+/*!40000 ALTER TABLE `rendezVous` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -242,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-16  0:42:36
+-- Dump completed on 2019-10-16  2:32:00
