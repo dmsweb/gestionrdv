@@ -164,14 +164,14 @@ CREATE TABLE `rendez_vous` (
   `dateRendezVous` date NOT NULL,
   `heureRendezVous` datetime NOT NULL,
   `id_patient` int(11) NOT NULL,
-  `id_employer` int(11) NOT NULL,
+  `id_domaine` int(11) NOT NULL,
   `id_etat_rendez_vous` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `rendez_vous_patient_FK` (`id_patient`),
-  KEY `rendez_vous_employer0_FK` (`id_employer`),
   KEY `rendez_vous_etat_rendez_vous1_FK` (`id_etat_rendez_vous`),
-  CONSTRAINT `rendez_vous_employer0_FK` FOREIGN KEY (`id_employer`) REFERENCES `employer` (`id`),
+  KEY `id_domaine` (`id_domaine`),
   CONSTRAINT `rendez_vous_etat_rendez_vous1_FK` FOREIGN KEY (`id_etat_rendez_vous`) REFERENCES `etat_rendez_vous` (`id`),
+  CONSTRAINT `rendez_vous_ibfk_1` FOREIGN KEY (`id_domaine`) REFERENCES `domaine` (`id`),
   CONSTRAINT `rendez_vous_patient_FK` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -229,7 +229,7 @@ CREATE TABLE `typeEmployer` (
 
 LOCK TABLES `typeEmployer` WRITE;
 /*!40000 ALTER TABLE `typeEmployer` DISABLE KEYS */;
-INSERT INTO `typeEmployer` VALUES (1,'admin'),(2,'secretaire'),(3,'médecin ');
+INSERT INTO `typeEmployer` VALUES (1,'admin'),(2,'secretaire'),(3,'médecin');
 /*!40000 ALTER TABLE `typeEmployer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -242,4 +242,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-15 23:47:30
+-- Dump completed on 2019-10-16  0:42:36

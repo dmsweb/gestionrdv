@@ -18,7 +18,17 @@
                 <div class="card-body">
                     <h3 class="card-title text-white">Nombre total de medecin</h3>
                     <div class="d-inline-block">
-                        <h2 class="text-white">4565</h2>
+                        <h2 class="text-white">
+                            <?php
+                                $i =0;
+                                foreach ($employers as $employer){
+                                    if(strtolower($employer->typeEmployer) === 'médecin'){
+                                        $i ++;
+                                    }
+                                }
+                            echo $i;
+                            ?>
+                        </h2>
                         <!--<p class="text-white mb-0">Jan - March 2019</p>-->
                     </div>
                     <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
@@ -30,7 +40,17 @@
                 <div class="card-body">
                     <h3 class="card-title text-white">Nombre total de sécretaire</h3>
                     <div class="d-inline-block">
-                        <h2 class="text-white">$ 8541</h2>
+                        <h2 class="text-white">
+                            <?php
+                            $i =0;
+                            foreach ($employers as $employer){
+                                if(strtolower($employer->typeEmployer) === 'secretaire'){
+                                   $i++;
+                                }
+                            }
+                            echo $i;
+                            ?>
+                        </h2>
                         <!--<p class="text-white mb-0">Jan - March 2019</p>-->
                     </div>
                     <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
@@ -52,7 +72,7 @@
         <div class="col-lg-3 col-sm-6">
             <div class="card gradient-4">
                 <div class="card-body">
-                    <h3 class="card-title text-white">Nombre total de spécialiste</h3>
+                    <h3 class="card-title text-white">Nombre total de spécialisté</h3>
                     <div class="d-inline-block">
                         <h2 class="text-white">99%</h2>
                         <!--<p class="text-white mb-0">Jan - March 2019</p>-->
