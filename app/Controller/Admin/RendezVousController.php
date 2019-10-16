@@ -14,7 +14,7 @@ class RendezVousController extends AppController {
     }
 
     public function index(){
-        $rendezvous = $this->RendezVous->all();
+        $rendezvous = $this->RendezVous->allRendezVous();
         // var_dump($employers);
 
         $this->render('admin.rendezVous.index', compact('rendezvous'));
@@ -30,7 +30,7 @@ class RendezVousController extends AppController {
                 'motif' => $_POST['motif']
             ]);
 
-            $id_patient = $this->Patient->last();
+            $id_patient = $this->Patient->lastPatient();
             $id_patient = intval($id_patient->id);
 
             $rdv = $this->RendezVous->create([
@@ -56,6 +56,45 @@ class RendezVousController extends AppController {
         $this->render('admin.rendezVous.add', compact('etat','domaine','form'));
 
     }
+
+
+    public function edit(){
+        if(!empty($_POST)){
+            $rd = $this->RendezVous->update($_GET['id'],[
+                'dateRendezVous' => $_POST['dateRendezVous'],
+                'heureRendezVous' => $_POST['heureRendezVous'],
+                'id_domaine' => $_POST['id_domaine'],
+                'id_etat_rendez_vous' => $_POST['id_etat_rendez_vous']
+            ]);
+
+            $id_patient = $this->RendezVous->findPatient($_GET['id']);
+            $id_patient = intval($id_patient->id);
+
+            $patient = $this->Patient->update($id_patient,[
+                'nomComplet' => $_POST['nomComplet'],
+                'adresse' => $_POST['adresse'],
+                'telephone' => $_POST['telephone'],
+                'motif' => $_POST['motif']
+            ]);
+
+
+            if($rd & $patient){
+                return $this->index();
+            }
+        }
+
+        $rdv = $this->RendezVous->findRendezVous($_GET['id']);
+
+        $this->loadModel('EtatRendezVous');
+        $this->loadModel('Domaine');
+        $etat = $this->EtatRendezVous->extract('id','libelle');
+        $domaine = $this->Domaine->extract('id','libelle');
+
+
+        $form = new \Core\HTML\BootstrapForm($rdv);
+        $this->render('admin.rendezVous.add', compact('etat','domaine','form'));
+    }
+
 
 
 }

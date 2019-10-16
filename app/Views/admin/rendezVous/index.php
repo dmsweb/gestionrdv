@@ -1,8 +1,8 @@
 <div class="row page-titles mx-0">
     <div class="col p-md-0">
         <?php
-        var_dump($rendezvous);
-        var_dump($_SESSION['telephone'],$_SESSION['id'],$_SESSION['domaine'],$_SESSION['type']);
+        //var_dump($rendezvous);
+        var_dump('La session',$_SESSION['telephone'],$_SESSION['id'],$_SESSION['domaine'],$_SESSION['type']);
         //var_dump(sha1('thiam	'));
         ?>
         <ol class="breadcrumb">
@@ -118,15 +118,34 @@
                                 <td><?= $rd->id ?></td>
                                 <td><?= $rd->nomComplet ?></td>
                                 <td><?= $rd->telephone ?></td>
-                                <td><?= $rd->email?></td>
-                                <td><?= $rd->typeEmployer ?></td>
-                                <td><?= $rd->domaine?></td>
+                                <td><?= $rd->heureR?></td>
+                                <td><?= $rd->domaine ?></td>
                                 <td>
-                                    <a href="?p=admin.employer.edit&id=<?= $rd->id ; ?>" class="btn btn-primary">Editer</a>
+                                    <?php
+                                    if($rd->etat === 'accorder'){
+                                        ?>
+                                        <span class="badge badge-pill badge-success"><?= $rd->etat?></span>
+                                    <?php
+                                    }elseif ($rd->etat === 'reporter'){
+                                        ?>
+                                        <span class="badge badge-pill badge-warning"><?= $rd->etat?></span>
+                                    <?php
+                                    }elseif ($rd->etat === 'annuler'){
+                                        ?>
+                                        <span class="badge badge-pill badge-danger"><?= $rd->etat?></span>
+                                        <?php
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <a style="margin-right: -20px; margin-left: -10px;" href="?p=admin.rendezVous.edit&id=<?= $rd->id ; ?>" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Modifier">
+                                        <i class="fa fa-pencil color-muted m-r-5"></i></a>
                                     <form action="?p=admin.posts.delete" method="post" style="display: inline">
                                         <input type="hidden" name="id" value="<?= $rd->id; ?>">
-                                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                                        <button type="submit" style="width: 5px; margin-right: -20px; background-color: transparent; border: none;" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Supprimer"><i class="fa fa-close color-danger"></i></button>
                                     </form>
+                                    <a style="margin-right: -20px;" href="?p=admin.rendezVous.edit&id=<?= $rd->id ; ?>" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Affcher">
+                                        <i class="fa fa-eye color-muted m-r-5"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
